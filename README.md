@@ -73,5 +73,16 @@ Inicie a gravação direto pelo microfone da sua máquina.
 Acompanhe o texto sendo transcrito progressivamente na tela em blocos de tempo real.
 Ao finalizar, gere a ata consolidada e exporte o documento.
 
+## 🐳 Como Executar via Docker (Opcional - Ideal para Upload de Mídia)
+Nota: O modo de gravação ao vivo via microfone físico não é suportado nativamente dentro de containers no Windows/Mac, mas o upload de arquivos funciona perfeitamente.
+
+Certifique-se de que o Ollama está rodando na sua máquina.
+
+Na raiz do projeto, execute o Docker Compose:
+```text
+docker compose up --build
+```
+Acesse no navegador: http://localhost:8501
+
 📄 Licença
 Este projeto é de código aberto sob a licença MIT. Sinta-se à vontade para modificar e melhorar!

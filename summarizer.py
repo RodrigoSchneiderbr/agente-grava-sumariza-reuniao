@@ -1,4 +1,9 @@
+import os
 import ollama
+
+# Detecta se há uma URL customizada do Ollama (usada pelo Docker), senão usa o padrão local
+ollama_host = os.getenv("OLLAMA_HOST", "http://localhost:11434")
+client = ollama.Client(host=ollama_host)
 
 def generate_meeting_summary(transcript, model_name="llama3"):
     """Envia a transcrição para o Ollama gerar a ata estruturada."""
@@ -13,7 +18,7 @@ def generate_meeting_summary(transcript, model_name="llama3"):
     """
     
     try:
-        response = ollama.chat(model=model_name, messages=[
+        response = client.chat(model=model_name, messages=[
             {
                 'role': 'user',
                 'content': prompt,
@@ -21,4 +26,4 @@ def generate_meeting_summary(transcript, model_name="llama3"):
         ])
         return response['message']['content']
     except Exception as e:
-        return f"Erro ao comunicar com o Ollama. Certifique-se de que ele está rodando localmente. Detalhes: {e}"
+        return f"Erro ao comunicar com o Ollama em ({ollama_host}). Certifique-se de que ele está rodando. Detalhes: {e}"
