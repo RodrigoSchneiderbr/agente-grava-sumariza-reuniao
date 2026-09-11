@@ -1,10 +1,12 @@
 FROM python:3.10-slim
 
-# Instula dependências do sistema necessárias para áudio e compilação básica
+# Instala dependências do sistema necessárias para áudio, PortAudio e compiladores
 RUN apt-get update && apt-get install -y \
     build-essential \
     libsndfile1 \
     ffmpeg \
+    portaudio19-dev \
+    libportaudio2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Define o diretório de trabalho dentro do container
