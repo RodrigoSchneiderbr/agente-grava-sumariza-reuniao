@@ -1,0 +1,14 @@
+# Python Cache (bytecode)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambiente Virtual
+.venv/
+venv/
+
+
+# Arquivos temporários gerados pelo aplicativo
+temp_*.mp3
+temp_uploaded_audio.mp3
+.vscode/
