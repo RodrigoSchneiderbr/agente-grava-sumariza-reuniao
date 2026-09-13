@@ -26,6 +26,12 @@ agente-reuniao/
 ├── summarizer.py        # Integração com o Ollama para geração de atas
 ├── exporter.py          # Módulo de exportação para PDF e Word (.docx)
 ├── requirements.txt     # Lista de dependências Python
+├── terraform/           # Arquivos de infraestrutura como código (IaC)
+│   ├── providers.tf     # Configuração da AWS
+│   ├── variables.tf     # Variáveis do Terraform
+│   ├── network.tf       # VPC e Security Groups
+│   ├── ec2.tf           # Configuração da Instância EC2
+│   └── outputs.tf       # IPs e links de saída
 ├── .gitignore           # Arquivos ignorados pelo controle de versão
 └── README.md            # Documentação do projeto
 ```
@@ -83,6 +89,41 @@ Na raiz do projeto, execute o Docker Compose:
 docker compose up --build
 ```
 Acesse no navegador: http://localhost:8501
+
+## Deploy na AWS com Terraform (EC2)
+Para subir a aplicação para a nuvem de forma automatizada utilizando uma instância EC2 da AWS, siga os passos abaixo:
+
+1. Provisionar a Infraestrutura com o Terraform
+Certifique-se de ter o Terraform instalado e as suas credenciais da AWS configuradas (aws configure).
+
+2. Entre na pasta do Terraform:
+
+```text
+cd terraform
+```
+3. Inicialize e aplique a infraestrutura:
+
+```text
+terraform init
+terraform plan
+terraform apply
+```
+4. O Terraform exibirá no final o IP Público da sua instância EC2.
+
+## Configurar a Aplicação na Nuvem
+
+1. Conecte-se na sua instância EC2 via SSH ou acesse-a, e clone o seu repositório:
+
+```text
+git clone https://github.com/RodrigoSchneiderbr/agente-grava-sumariza-reuniao
+cd agente-reuniao
+```
+2. Suba a aplicação utilizando o Docker diretamente na máquina (o script do Terraform já instala o Docker automaticamente):
+
+```text
+docker build -t agente-reuniao .
+docker run -d -p 8501:8501 --restart always agente-reuniao
+```
 
 📄 Licença
 Este projeto é de código aberto sob a licença MIT. Sinta-se à vontade para modificar e melhorar!
